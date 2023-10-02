@@ -40,6 +40,14 @@ cache.writeQuery({
   data
 });
 
+// write the cache data after cache is reset
+client.onResetStore(() => 
+  cache.writeQuery({
+    query: gql`{ isLoggedIn @client }`,
+    data
+  })
+);
+
 const App = () => {
     return (
         <ApolloProvider client={client}>
