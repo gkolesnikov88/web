@@ -41,12 +41,15 @@ cache.writeQuery({
 });
 
 // write the cache data after cache is reset
-client.onResetStore(() => 
+client.onResetStore(() => {
+  const data = {
+    isLoggedIn: !!localStorage.getItem('token')
+  };
   cache.writeQuery({
     query: gql`{ isLoggedIn @client }`,
     data
   })
-);
+});
 
 const App = () => {
     return (
