@@ -23,7 +23,7 @@ const NEW_NOTE = gql`
 `;
 
 // import the query
-import { GET_NOTES } from '../gql/query';
+import { GET_MY_NOTES, GET_NOTES } from '../gql/query';
 
 const NewNote = (props) => {
   useEffect(() => {
@@ -32,8 +32,8 @@ const NewNote = (props) => {
   });
 
   const [data, { loading, error }] = useMutation(NEW_NOTE, {
-    // refetch the GET_NOTES query to update the cache
-    refetchQueries: [{ query: GET_NOTES }],
+    // refetch the GET_NOTES and GET_MY_NOTES queries to update the cache
+    refetchQueries: [{ query: GET_MY_NOTES }, { query: GET_NOTES }],
     onCompleted: data => {
       // when complete, redirect the user to the note page
       props.history.push(`note/${data.newNote.id}`);
